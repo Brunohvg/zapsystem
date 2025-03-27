@@ -3,21 +3,21 @@ from django.db import models
 from apps.lojas.models import Loja
 
 class UsuarioManager(BaseUserManager):
-    def create_user(self, email, nome, senha=None, **extra_fields):
+    def create_user(self, email, nome, password=None, **extra_fields):
         if not email:
             raise ValueError('O endereço de e-mail deve ser fornecido')
         email = self.normalize_email(email)
         usuario = self.model(email=email, nome=nome, **extra_fields)
-        usuario.set_password(senha)
+        usuario.set_password(password)
         usuario.save(using=self._db)
         return usuario
 
-    def create_superuser(self, email, nome, senha=None, **extra_fields):
+    def create_superuser(self, email, nome, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-        return self.create_user(email, nome, senha, **extra_fields)
-
+        return self.create_user(email, nome, password, **extra_fields)
+    
 class Usuario(AbstractBaseUser, PermissionsMixin):
     nome = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
@@ -44,4 +44,4 @@ class UsuarioLoja(models.Model):
         unique_together = ("usuario", "loja")  # Garante que um usuário não se vincule mais de uma vez à mesma loja
 
     def __str__(self):
-        return f"{self.usuario.nome} - {self.loja.nome}"
+        return f"{self.usuario.nome} - {self.loja.nome_loja}"

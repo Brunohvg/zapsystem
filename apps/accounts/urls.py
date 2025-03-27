@@ -1,26 +1,14 @@
-"""
-URLs do app 'usuarios'
------------------------
-Este arquivo configura as rotas (URLs) relacionadas às funcionalidades de usuários,
-como registro, listagem, edição, exclusão, login, logout, recuperação e redefinição de senha.
-
-Cada rota utiliza uma view correspondente definida em views.py e está
-associada a um nome único (name) que facilita sua referência em templates e redirecionamentos.
-"""
-
 from django.urls import path
 from . import views
 
 app_name = 'accounts'
 
-urlpatterns = [
-
-        
+urlpatterns = [  
     # Rota para o login do usuário
     path('login/', views.logar, name='login'),
     # Rota para registrar um novo usuário
     path('registrar/', views.registrar, name='registrar'),
-    
+
     # Rota para exibir a lista de usuários cadastrados
     #path('lista/', views.lista_usuarios, name='lista_usuarios'),
     
@@ -41,5 +29,6 @@ urlpatterns = [
     
     # Rota para redefinir a senha via link enviado por email
     #path('resetar-senha/<uidb64>/<token>/', views.redefinir_senha, name='resetar_senha'),
+    
     #path('perfil/', views.config_conta, name='config_conta')
 ]

@@ -10,7 +10,7 @@ from apps.lojas.forms import RegistroLojaForm
 from .models import Usuario, UsuarioLoja
 
 # Configuração do logger específico para o app 'usuarios'
-logger = logging.getLogger(None)
+logger = logging.getLogger('usuarios')
 
 TEMPLATE_NAME = 'accounts/base_auth.html'
 
