@@ -1,0 +1,24 @@
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+      {{ form.nova_senha }}
+      <label for="{{ form.nova_senha.id_for_label }}" class="form-label fw-bold">Nova Senha</label>
+      <small class="text-danger">{{ form.nova_senha.errors }}</small>
+    </div>
+    
+    <div class="form-floating mb-3">
+      {{ form.confirmar_senha }}
+      <label for="{{ form.confirmar_senha.id_for_label }}" class="form-label fw-bold">Confirme a Nova Senha</label>
+      <small class="text-danger">{{ form.confirmar_senha.errors }}</small>
+    </div>
+  
+    <button type="submit" class="btn btn-primary w-100 fs-4 mb-4 rounded-2">
+      Redefinir Senha
+    </button>
+  </form>
+  
+  <div class="d-flex align-items-center justify-content-center">
+    <p class="fs-4 mb-0 fw-bold">Lembrou sua senha?</p>
+    <a class="text-primary fw-bold ms-2" href="#">Voltar para Login</a>
+  </div>
+  

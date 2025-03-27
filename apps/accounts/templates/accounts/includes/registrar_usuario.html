@@ -1,0 +1,88 @@
+<form method="POST">
+  {% csrf_token %}
+
+  <!-- Etapa 1: Informações do Usuário -->
+  <div id="etapa-1">
+    <h5 class="fw-bold text-dark">Informações do Usuário</h5>
+
+    <div class="form-floating mb-3">
+      {{ form.nome }}
+      <label for="nome" class="form-label fw-bold">Nome</label>
+      <small class="text-danger">{{ form.nome.errors }}</small>
+    </div>
+
+    <div class="form-floating mb-3">
+      {{ form.email }}
+      <label for="email" class="form-label fw-bold">Email</label>
+      <small class="text-danger">{{ form.email.errors }}</small>
+    </div>
+
+    <div class="form-floating mb-4">
+      {{ form.password1 }}
+      <label for="password1" class="form-label fw-bold">Senha</label>
+      <small class="text-danger">{{ form.password1.errors }}</small>
+    </div>
+
+    <div class="form-floating mb-4">
+      {{ form.password2 }}
+      <label for="password2" class="form-label fw-bold">Confirmar Senha</label>
+      <small class="text-danger">{{ form.password2.errors }}</small>
+    </div>
+
+    <button type="button" class="btn btn-primary w-100 fs-4 mb-4 rounded-2" onclick="mostrarEtapa2()">Próximo</button>
+  </div>
+
+  <!-- Etapa 2: Informações da Loja -->
+  <div id="etapa-2" style="display: none;">
+    <h5 class="fw-bold text-dark">Informações da Loja</h5>
+
+    <div class="form-floating mb-3">
+      {{ loja_form.nome_loja }}
+      <label for="nome_loja" class="form-label fw-bold">Nome da Loja</label>
+      <small class="text-danger">{{ loja_form.nome_loja.errors }}</small>
+    </div>
+
+    <div class="form-floating mb-3">
+      {{ loja_form.cnpj }}
+      <label for="cnpj" class="form-label fw-bold">CNPJ</label>
+      <small class="text-danger">{{ loja_form.cnpj.errors }}</small>
+    </div>
+
+    <div class="form-floating mb-3">
+      {{ loja_form.endereco }}
+      <label for="endereco" class="form-label fw-bold">Endereço</label>
+      <small class="text-danger">{{ loja_form.endereco.errors }}</small>
+    </div>
+
+    <div class="form-floating mb-3">
+      {{ loja_form.telefone }}
+      <label for="telefone" class="form-label fw-bold">Telefone</label>
+      <small class="text-danger">{{ loja_form.telefone.errors }}</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 fs-4 mb-4 rounded-2">
+      Cadastrar
+    </button>
+
+    <button type="button" class="btn btn-secondary w-100 fs-4 mb-4 rounded-2" onclick="mostrarEtapa1()">Voltar</button>
+  </div>
+</form>
+
+<div class="d-flex align-items-center justify-content-center">
+  <p class="fs-4 mb-0 fw-bold">Já tem uma conta?</p>
+  <a class="text-primary fw-bold ms-2" href="{% url 'accounts:login' %}">Entrar</a>
+</div>
+
+<script>
+  // Função para mostrar a Etapa 2 e esconder a Etapa 1
+  function mostrarEtapa2() {
+    document.getElementById("etapa-1").style.display = "none";
+    document.getElementById("etapa-2").style.display = "block";
+  }
+
+  // Função para mostrar a Etapa 1 e esconder a Etapa 2
+  function mostrarEtapa1() {
+    document.getElementById("etapa-2").style.display = "none";
+    document.getElementById("etapa-1").style.display = "block";
+  }
+</script>
