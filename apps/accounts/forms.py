@@ -177,3 +177,5 @@ class NovaSenhaForm(forms.Form):
             raise forms.ValidationError("As senhas não coincidem.")
         
         return cleaned_data
+
+
