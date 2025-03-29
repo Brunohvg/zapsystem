@@ -22,8 +22,17 @@
                   <img src="{% static 'assets/images/logos/logo.svg' %}" width="180" alt="Logo">
                 </a>
                 <p class="text-center">{% block subtitle %}Lojex - Agilidade e Controle na Gestão de Entregas 🚀{% endblock %}</p>
-                
-                  {% block form_fields %}{% endblock %}
+
+                <!-- Exibição de Mensagens -->
+                {% if messages %}
+                  <div class="alert alert-info" role="alert">
+                    {% for message in messages %}
+                      <p>{{ message }}</p>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+                {% block form_fields %}{% endblock %}
 
               </div>
             </div>

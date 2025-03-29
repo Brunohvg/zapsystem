@@ -1,3 +1,4 @@
+from gzip import READ
 import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
@@ -9,6 +10,7 @@ from .forms import RegistroUsuarioForm, LoginForm, EsqueciSenhaForm, NovaSenhaFo
 from apps.lojas.forms import RegistroLojaForm
 from .models import Usuario, UsuarioLoja
 from django.conf import settings
+from django.contrib import messages
 
 # Configuração do logger
 logger = logging.getLogger('usuarios')
@@ -63,12 +65,15 @@ def registrar(request):
             logger.info(f"Novo usuário registrado: {usuario.email}, Loja: {loja.nome_loja}")
             return redirect('accounts:login')
         else:
+            messages.error(request, 'ERRO USUARIO JA EXISTE', extra_tags='error')
             logger.warning("Falha ao registrar usuário. Dados inválidos.")
     else:
         form_usuario = RegistroUsuarioForm()
         form_loja = RegistroLojaForm()
 
     return render(request, template_name=TEMPLATE_NAME, context={'form': form_usuario, 'loja_form': form_loja})
+
+
 
 
 def vincular_usuario_a_loja(usuario, loja):
